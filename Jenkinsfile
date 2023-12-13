@@ -18,16 +18,16 @@ pipeline {
             steps{
                 echo "Push to DockerHub"
                 withCredentials([usernamePassword(credentialsId:"DockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker tag my-notes-app ${env.dockerHubUser}/my-notes-app:latest"
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker push ${env.dockerHubUser}/my-notes-app:latest"
+                sh "sudo docker tag my-notes-app ${env.dockerHubUser}/my-notes-app:latest"
+                sh "sudo docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                sh "sudo docker push ${env.dockerHubUser}/my-notes-app:latest"
                 }
             }
         }
         stage("Deploy"){
             steps{
                 echo "Deploy"
-                sh "docker run -d -p 8001:8000 my-notes-app"
+                sh "sudo docker run -d -p 8001:8000 my-notes-app"
             }
         }
         
