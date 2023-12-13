@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label Agent1
+        label 'Agent1'
     }
     stages{
          stage("Clone"){
